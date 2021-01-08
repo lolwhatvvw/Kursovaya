@@ -1,6 +1,6 @@
 <template>
 <body>
-<div class="bigSearch">
+    <div class="bigSearch">
         <form class=header @submit.prevent="onSubmit">
             <span class = "icon" @click = "$emit('search-book', searchValue)">
             <i class="fa fa-search"></i>
@@ -16,9 +16,11 @@
             <option>Автор</option>
             <option>Название</option>
         </select>
-        </div>
+    </div>
+    <div class="navigation">
+        <router-link tag="t" class="link" :to="{name: 'favorite'}">Favorite</router-link>
         <a class="nav-link" @click="logUserOut"> Logout</a>
-        <router-link tag="a" class="link" :to="{name: 'favorite'}">Favorite</router-link>
+    </div>
 </body>
 </template>
 
@@ -48,8 +50,8 @@ export default {
             }
         },
         logUserOut() {
-      localStorage.removeItem("jwt");
-      this.$router.push("/");
+            localStorage.removeItem("jwt");
+            this.$router.push("/");
     }
     }
 }
@@ -57,14 +59,26 @@ export default {
 
 <style scoped>
 body{
+    height: 130px;
     background: #717b87;
     display: flex;
     justify-content: center;
+
+}
+.navigation{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-left: 90vw;
+    color: rgb(236, 236, 236);
+    cursor: pointer;
 }
 .bigSearch{
     width: 300px;
     height: 150px;
     display: flex;
+    position: absolute;
     flex-direction: column;
     justify-content: center;
     align-items: center;
