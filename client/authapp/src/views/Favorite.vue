@@ -1,6 +1,8 @@
 <template>
   <body>
-    <router-link tag="a" class="link" :to="{name: 'main'}">Home</router-link>
+    <div class="header">
+      <router-link tag="a" class="link" :to="{name: 'main'}">Home</router-link>
+    </div>
     <book-results :books="favorite" @remove="deleteFavorite"></book-results>
   </body>
 </template>
@@ -24,7 +26,6 @@ export default {
     async deleteFavorite(book){
       try {
             let token = localStorage.getItem("jwt");
-            
             let decoded = VueJwtDecode.decode(token);
             const login = {
                 email: decoded.email,
@@ -50,10 +51,28 @@ export default {
       catch{}
     }
   },
+    
   created() {
     this.getFavorite();
   }
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+  body{
+    background: rgb(236, 236, 236);
+    height: 100%
+  }
+  .header{
+    height: 130px;
+    background: #717b87;
+    display: flex;
+    justify-content: center;
+  }
+  .link{
+    display: flex;
+    align-items: center;
+    color: rgb(236, 236, 236);
+    cursor: pointer;
+  }
+</style>
