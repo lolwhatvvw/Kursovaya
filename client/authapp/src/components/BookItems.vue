@@ -4,13 +4,15 @@
             <img v-if="book.volumeInfo.imageLinks" :src="book.volumeInfo.imageLinks.thumbnail"/>
             <img v-else src="/src/assets/books.png">
         </div>
+        <div class="links">
         <a :href="book.volumeInfo.infoLink" class="bigLink">Читать</a>
         <router-link tag="a" class="link" :to="{name: 'book', params: {book: book}}">Описание</router-link>
         <div v-if="main()">
-            <div @click="updateFavorite">add to favorite</div>
+            <div class="workWithFavorite" @click="updateFavorite">Добавить в избранное</div>
         </div>
         <div v-if="favorite()">
-            <div @click="deleteFavorite">delete</div>
+            <div class="workWithFavorite" @click="deleteFavorite">Удалить из избранного</div>
+        </div>
         </div>
         <div class = "description">
             <p class="title">{{book.volumeInfo.title}}</p>
@@ -58,7 +60,6 @@ export default {
     },
     async deleteFavorite() {
         this.$emit('remove', this.book);
-        
     }
 }
 }
@@ -88,6 +89,10 @@ export default {
     text-overflow: ellipsis;
     overflow: auto;
 }
+.links{
+    display:flex;
+    flex-direction: row;
+}
 .bigLink{
     font-size: 13px;
     margin-right: 5px;
@@ -100,12 +105,21 @@ export default {
 .link{
     font-size: 13px;
     padding-left: 5px;
+    margin-right: 5px;
     border-left: 1px solid black;
     color: rgb(100, 100, 100);
     text-decoration: none;
 }
 .link:visited{
     color: rgb(100, 100, 100);
+}
+.workWithFavorite{
+    font-size: 13px;
+    padding-left: 5px;
+    border-left: 1px solid black;
+    color: rgb(100, 100, 100);
+    text-decoration: none;
+    cursor: pointer;
 }
 .cover img {
     width: 100%;

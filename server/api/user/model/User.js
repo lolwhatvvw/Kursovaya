@@ -14,6 +14,9 @@ const userSchema = mongoose.Schema({
     type: String,
     required: [true, "Please Include your password"]
   },
+  favorite: [{
+    type: Object
+  }],
   tokens: [
     {
       token: {
@@ -37,7 +40,7 @@ userSchema.pre("save", async function(next) {
 userSchema.methods.generateAuthToken = async function() {
   const user = this;
   const token = jwt.sign(
-    { _id: user._id, name: user.name, email: user.email },
+    { _id: user._id, name: user.name, email: user.email},
     "secret"
   );
   user.tokens = user.tokens.concat({ token });
